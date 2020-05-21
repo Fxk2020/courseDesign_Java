@@ -1,5 +1,6 @@
 package vote;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +25,7 @@ public class TakepartinVote extends JFrame implements ActionListener {
 
 	Socket s;
 
-	final int W = 400, H = 700;
+	final int W = 500, H = 650;
 	JButton b1;
 	int t;
 
@@ -65,7 +66,10 @@ public class TakepartinVote extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 
-		this.setTitle("                      参与投票");
+		//frame不能改变大小
+		this.setResizable(false);
+		
+		this.setTitle("参与投票");
 		this.setSize(W, H);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
@@ -100,23 +104,23 @@ public class TakepartinVote extends JFrame implements ActionListener {
 			}
 			JLabel item0 = new JLabel("投票内容:");
 			item0.setFont(MyTools.f8);
-			item0.setBounds(50, 0, 100, 50);
+			item0.setBounds(70, 0, 200, 50);
 
 			JLabel name0 = new JLabel("发起人:");
 			name0.setFont(MyTools.f7);
-			name0.setBounds(100, 25, 100, 50);
+			name0.setBounds(120, 25, 100, 50);
 
 			// 获得投票内容和投票发起人
 			item.setFont(MyTools.f8);
-			item.setBounds(150, 0, 300, 50);
+			item.setBounds(200, 0, 300, 50);
 			name.setFont(MyTools.f7);
-			name.setBounds(200, 25, 100, 50);
+			name.setBounds(189, 25, 100, 50);
 
 			// 进行投票，展示复选框
 			jcb1 = new JCheckBox(v.getOption1());
-			jcb1.setBounds(110, 160, 150, 32);
+			jcb1.setBounds(160, 220, 150, 32);
 			jcb2 = new JCheckBox(v.getOption2());
-			jcb2.setBounds(110, 210, 150, 32);
+			jcb2.setBounds(160, 250, 150, 32);
 			jcb1.addItemListener(new MyItemListener());
 			jcb2.addItemListener(new MyItemListener());
 			jcb1.setFont(MyTools.f3);
@@ -126,19 +130,19 @@ public class TakepartinVote extends JFrame implements ActionListener {
 //			System.out.println(v.getOption3().trim().equals(""));
 			if ((v.getOption3() != null) && (v.getOption4() != null)) {
 				jcb3 = new JCheckBox(v.getOption3());
-				jcb3.setBounds(110, 260, 150, 32);
+				jcb3.setBounds(160, 280, 150, 32);
 				jcb4 = new JCheckBox(v.getOption4());
-				jcb4.setBounds(110, 310, 150, 32);
+				jcb4.setBounds(160, 310, 150, 32);
 				jcb3.addItemListener(new MyItemListener());
 				jcb4.addItemListener(new MyItemListener());
 				jcb3.setFont(MyTools.f3);
 				jcb4.setFont(MyTools.f3);
 				String a4 = new String("选项3已得票" + v.getNumber3());
 				JLabel la3 = new JLabel(a4);
-				la3.setBounds(10, 260, 100, 32);
+				la3.setBounds(50, 280, 100, 32);
 				String a5 = new String("选项4已得票" + v.getNumber4());
 				JLabel la4 = new JLabel(a5);
-				la4.setBounds(10, 310, 100, 32);
+				la4.setBounds(50, 310, 100, 32);
 				this.add(jcb3);
 				this.add(jcb4);
 				this.add(la3);
@@ -146,37 +150,44 @@ public class TakepartinVote extends JFrame implements ActionListener {
 			}
 
 			b1 = new JButton("确定");
-			b1.setFont(MyTools.f8);
-			b1.setBounds(125, 550, 100, 75);
+			b1.setFont(MyTools.f9);
+			b1.setBackground(new Color(30, 144, 255));
+			b1.setForeground(Color.white);
+			b1.setBounds(175, 540, 100, 45);
 
 			// 当前票数的显示
 			String a6 = new String("选项1已得票" + v.getNumber1());
 			JLabel la1 = new JLabel(a6);
-			la1.setBounds(10, 160, 100, 32);
+			la1.setBounds(50, 220, 100, 32);
 			String a3 = new String("选项2已得票" + v.getNumber2());
 			JLabel la2 = new JLabel(a3);
-			la2.setBounds(10, 210, 100, 32);
+			la2.setBounds(50, 250, 100, 32);
 
 			// 补充意见
-			JLabel su = new JLabel("补充意见:");
+			JLabel su = new JLabel("你的补充意见:");
 			su.setFont(MyTools.f7);
-			su.setBounds(75, 350, 100, 50);
+			su.setBounds(75, 350, 150, 50);
 			suggesstion.setFont(MyTools.f8);
 			// 加滚动条
 			suggesstion.setLineWrap(true);// 使文本区域自动换行
 			suggesstion.setWrapStyleWord(true);// 使单词完整
 			JScrollPane scrollpane1 = new JScrollPane(suggesstion, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 					JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-			scrollpane1.setBounds(20, 400, 300, 130);
+			scrollpane1.setBounds(50, 400, 380, 130);
 
 			// 已有意见
-			suggesstion2.setText("已有的建议为：                   " + Sug);
+			if(Sug!=null) {
+				suggesstion2.setText("	已有的建议为：\n" + Sug);
+			}else {
+				suggesstion2.setText("	暂无建议！");
+			}
+			
 			suggesstion2.setFont(MyTools.f8);
 			suggesstion2.setLineWrap(true);// 使文本区域自动换行
 			suggesstion2.setWrapStyleWord(true);// 使单词完整
 			JScrollPane scrollpane2 = new JScrollPane(suggesstion2, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 					JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-			scrollpane2.setBounds(20, 65, 300, 100);
+			scrollpane2.setBounds(50, 65, 380, 150);
 
 			// b1加监听器
 
@@ -204,7 +215,7 @@ public class TakepartinVote extends JFrame implements ActionListener {
 		// 添加背景图片
 		ImageIcon backGroundIma = new ImageIcon("imag/投票.png"); // 在Java项目下放图片
 		JLabel backGroundPic = new JLabel(backGroundIma); // 设置一个标签将图片加在标签上
-		backGroundPic.setBounds(0, 0, 400, 700); // 参数X，Y，W，H大小必须超过JFrame的大小否则图片不会覆盖窗体
+		backGroundPic.setBounds(0, 0, 500, 670); // 参数X，Y，W，H大小必须超过JFrame的大小否则图片不会覆盖窗体
 		this.getLayeredPane().add(backGroundPic, new Integer(Integer.MIN_VALUE));
 		((JPanel) this.getContentPane()).setOpaque(false);
 //		this.setOpaque(false); // 将面板设为透明SETOpaque（）方法
@@ -286,6 +297,8 @@ public class TakepartinVote extends JFrame implements ActionListener {
 				}
 				else if(m.getInformation().equals("投票投完了")) {
 					JOptionPane.showMessageDialog(null, "投票结束请统计票数", "投票已结束！", JOptionPane.ERROR_MESSAGE);
+					
+					this.dispose();
 				}
 			} else {
 				JOptionPane.showMessageDialog(null, "你不能一项不选", "请选择！", JOptionPane.ERROR_MESSAGE);
@@ -319,7 +332,7 @@ public class TakepartinVote extends JFrame implements ActionListener {
 		SwingUtilities.invokeLater(new Runnable() { // 匿名内部类，重写了run方法
 			public void run() {
 				students  sss = new students();
-				sss.setName("joey");
+				sss.setName("张楚岚");
 				new TakepartinVote(sss);
 			}
 		});

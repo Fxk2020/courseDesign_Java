@@ -31,7 +31,7 @@ import java.util.Scanner;
 
 import java.net.*;
 
-public class Compile extends JFrame {
+public class Compile extends JFrame implements ActionListener {
 	final int W = 350;
 	final int H = 520;
 
@@ -63,8 +63,7 @@ public class Compile extends JFrame {
 		label1.setBounds(125, 10, 100, 50);
 		
 		area1.setFont(font);
-		Lis1 listener1 = new Lis1();
-		b1.addActionListener(listener1);
+		b1.addActionListener(this);
 		area1.setLineWrap(true); // 使文本区域自动换行
 		area1.setWrapStyleWord(true); // 使单词完整
 		JScrollPane scrollpane1 = new JScrollPane(area1, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -99,57 +98,55 @@ public class Compile extends JFrame {
 
 	}
 
-	private class Lis1 implements ActionListener {
+	public void actionPerformed(ActionEvent e) {
+		
+		try {
+			s = new Socket("127.0.0.1", 8888);
 
-		public void actionPerformed(ActionEvent e) {
+			//必须姓名和内容都不为空
+			if(!(area1.getText().equals(""))) {
+			
+			Users u = new Users();
+			u.setDosomething(MessageType.message_information_Compile);
+			u.setName(stu_name);
+			u.setInformation(area1.getText());
 
-			try {
-				s = new Socket("127.0.0.1", 8888);
+			ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+			oos.writeObject(u);
+			oos.flush();
+			
 
-				//必须姓名和内容都不为空
-				if(!(area1.getText().equals(""))) {
-				
-				Users u = new Users();
-				u.setDosomething(MessageType.message_information_Compile);
-				u.setName(stu_name);
-				u.setInformation(area1.getText());
+			Message m = null;
+			while (m == null) {
+				ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
+				m = (Message) ois.readObject();
 
-				ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
-				oos.writeObject(u);
-				oos.flush();
-				
-
-				Message m = null;
-				while (m == null) {
-					ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
-					m = (Message) ois.readObject();
-
-				}
-				if (m.getMessType().equals(MessageType.message_information_Compile_succeed)) {
-					JOptionPane.showMessageDialog(null, "你已编辑成功，请退出编辑界面");
-
-				}
-				else if(m.getMessType().equals("查无此人")) {
-					JOptionPane.showMessageDialog(null, "请输入真实姓名");
-				}
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "有的输入是空的", "请继续输入", JOptionPane.ERROR_MESSAGE);
-				}
-
-			} catch (UnknownHostException e1) {
-
-				e1.printStackTrace();
-			} catch (IOException e1) {
-
-				e1.printStackTrace();
-			} catch (ClassNotFoundException e1) {
-
-				e1.printStackTrace();
 			}
-        
-		}
+			if (m.getMessType().equals(MessageType.message_information_Compile_succeed)) {
+				JOptionPane.showMessageDialog(null, "你已编辑成功！");
+				
+				this.dispose();
 
+			}
+			else if(m.getMessType().equals("查无此人")) {
+				JOptionPane.showMessageDialog(null, "请输入真实姓名");
+			}
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "有的输入是空的", "请继续输入", JOptionPane.ERROR_MESSAGE);
+			}
+
+		} catch (UnknownHostException e1) {
+
+			e1.printStackTrace();
+		} catch (IOException e1) {
+
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+
+			e1.printStackTrace();
+		}
+		
 	}
 
 }

@@ -21,10 +21,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.*;
 
-public class Vote extends JFrame{
+public class Vote extends JFrame implements ActionListener{
 
 	final int W = 500;
-	final int H = 750;
+	final int H = 680;
 	
 	
 	public Socket s;
@@ -36,7 +36,7 @@ public class Vote extends JFrame{
 	JTextField f2,f3,f4,f5;
 	JTextArea area;
 	
-	JButton b1 = new JButton("确定发起");
+	JButton b1 ;
 	
 	//用于获取一系列数据
 	String item;
@@ -85,104 +85,57 @@ public class Vote extends JFrame{
 		
 		//标签的加入：
 		l2 = new JLabel("需要投票的内容：");
-		l2.setFont(MyTools.f1);
-		l2.setBounds(0,70,200,50);
+		l2.setFont(MyTools.f0);
+		l2.setBounds(160,20,200,50);
 		l3 = new JLabel("选项一：");
 		l3.setFont(MyTools.f3);
-		l3.setBounds(0,250,200,50);
+		l3.setBounds(45,200,200,50);
 		l4 = new JLabel("选项二：");
 		l4.setFont(MyTools.f3);
-		l4.setBounds(0,350,200,50);
+		l4.setBounds(45,300,200,50);
 		l5 = new JLabel("选项三：");
 		l5.setFont(MyTools.f3);
-		l5.setBounds(0,450,200,50);
+		l5.setBounds(45,400,200,50);
 		l6 = new JLabel("选项四：");
 		l6.setFont(MyTools.f3);
-		l6.setBounds(0,550,200,50);
+		l6.setBounds(45,500,200,50);
 		
 		//文本框的加入：
 		area = new JTextArea(75,75);
 		area.setFont(MyTools.f2);
-		area.setBounds(50, 120,400, 100);
+		area.setBounds(50, 70,400, 100);
 		f2 = new JTextField(25);
 		f2.setFont(MyTools.f3);
-		f2.setBounds(80, 260, 250, 50);
+		f2.setBounds(120, 210, 250, 50);
 		f3 = new JTextField(25);
 		f3.setFont(MyTools.f3);
-		f3.setBounds(80, 360, 250, 50);
+		f3.setBounds(120, 310, 250, 50);
 		f4 = new JTextField(25);
 		f4.setFont(MyTools.f3);
-		f4.setBounds(80, 460, 250, 50);
+		f4.setBounds(120, 410, 250, 50);
 		f5 = new JTextField(25);
 		f5.setFont(MyTools.f3);
-		f5.setBounds(80, 560, 250, 50);
+		f5.setBounds(120, 510, 250, 50);
 		
 		//按钮的加入：
+		b1 = new JButton("发起投票");
+		b1.setBackground(new Color(30, 144, 255));
+		b1.setForeground(Color.white);
 		b1.setFont(MyTools.f5);
-		b1.setBounds(150,625 , 200, 50);
+		b1.setBounds(150,575 , 150, 50);
 		
-		//添加匿名监听类
-		b1.addActionListener(new ActionListener() {
-			
-			
-			public void actionPerformed(ActionEvent e) {
-			
-				try {
-					s = new Socket("127.0.0.1", 8888);
-					
-					//获取一系列数据
-					item = area.getText();
-					option1 = f2.getText();
-					option2 = f3.getText();
-					option3 = f4.getText();
-					option4 = f5.getText();
-
-					SetVote tickets = new SetVote();
-					tickets.setName(vote_name);
-					tickets.setItem(item);
-					tickets.setOption1(option1);
-					tickets.setOption2(option2);
-					//当没有3，4时不加入数据库
-					if((!option3.equals(""))&&(!option4.equals(""))) {
-						tickets.setOption3(option3);
-						tickets.setOption4(option4);
-					}
-					
-					
-					Users u = new Users();
-					u.setTicket(tickets);
-					u.setDosomething(MessageType.message_vote);
-					
-					ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
-					oos.writeObject(u);
-					oos.flush();
-					
-					Message m = null;
-					while (m == null) {
-						ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
-						m = (Message) ois.readObject();
-
-					}
-					
-					if(m.getInformation().equals("设置投票成功")) {
-						JOptionPane.showMessageDialog(null, "你已发起投票！");
-					}
-					
-
-					
-				} catch (UnknownHostException e1) {
-					
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					
-					e1.printStackTrace();
-				} catch (ClassNotFoundException e1) {
-					// TODO 自动生成的 catch 块
-					e1.printStackTrace();
-				}
-				
-			}
-		});
+		b1.addActionListener(this);
+		
+//		//添加匿名监听类 匿名类无法操作组件 改为接口方法
+//		b1.addActionListener(new ActionListener() {
+//			
+//			
+//			public void actionPerformed(ActionEvent e) {
+//			
+//				
+//				
+//			}
+//		});
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -222,5 +175,66 @@ public class Vote extends JFrame{
 		});
 	
 }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		try {
+			s = new Socket("127.0.0.1", 8888);
+			
+			//获取一系列数据
+			item = area.getText();
+			option1 = f2.getText();
+			option2 = f3.getText();
+			option3 = f4.getText();
+			option4 = f5.getText();
+
+			SetVote tickets = new SetVote();
+			tickets.setName(vote_name);
+			tickets.setItem(item);
+			tickets.setOption1(option1);
+			tickets.setOption2(option2);
+			//当没有3，4时不加入数据库
+			if((!option3.equals(""))&&(!option4.equals(""))) {
+				tickets.setOption3(option3);
+				tickets.setOption4(option4);
+			}
+			
+			
+			Users u = new Users();
+			u.setTicket(tickets);
+			u.setDosomething(MessageType.message_vote);
+			
+			ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+			oos.writeObject(u);
+			oos.flush();
+			
+			Message m = null;
+			while (m == null) {
+				ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
+				m = (Message) ois.readObject();
+
+			}
+			
+			if(m.getInformation().equals("设置投票成功")) {
+				JOptionPane.showMessageDialog(null, "你已发起投票！");
+				
+				this.dispose();
+				
+			}
+			
+
+			
+		} catch (UnknownHostException e1) {
+			
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO 自动生成的 catch 块
+			e1.printStackTrace();
+		}
+		
+	}
 
 }

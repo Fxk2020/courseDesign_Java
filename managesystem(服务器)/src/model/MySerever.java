@@ -120,9 +120,9 @@ public class MySerever {
 
 				// 防止sug中出现null的标记
 				if (sug == null) {
-					sug = "第" + i + "条是：" + rs2.getString("advice");
+					sug = "第" + i + "条是：" + rs2.getString("advice")+"\n";
 				} else {
-					sug += "第" + i + "条是：" + rs2.getString("advice");
+					sug += "第" + i + "条是：" + rs2.getString("advice")+"\n";
 				}
 			}
 
@@ -378,10 +378,6 @@ public class MySerever {
 			update2 = "INSERT into suggesstion (advice) VALUES ('" + t.getSuggesstion() + "');";
 		}
 
-		
-
-		
-
 		// 一个人投票加一个人
 
 		try {
@@ -437,7 +433,7 @@ public class MySerever {
 			e.printStackTrace();
 		}
 		
-		if(i == 4) {
+		if(i == 4) {//班级还有人没有投票
 			b =false;
 		}
 		
@@ -486,6 +482,9 @@ public class MySerever {
 		return stu;
 	}
 
+	
+	
+//线程类
 	class CheckSocket extends Thread// 线程类
 	{
 		Socket s = null;
