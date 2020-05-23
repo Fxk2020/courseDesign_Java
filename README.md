@@ -138,7 +138,7 @@ name|information|time
 		contentPane.add(processBar);// 向面板添加进度控件
 	}
   ```
-  ![alt_text](https://github.com/Fxk2020/courseDesign_Java/blob/master/imgs/4WX(L7_ACAA%60YI8G%5BIXAFPR.png)
+  ![alt_text](https://github.com/Fxk2020/courseDesign_Java/blob/master/imgs/4WX(L7_ACAA%60YI8G%5BIXAFPR.png )
 * #### 2.文件的下载
   文件的下载和文件上传的答题思路相同，不过这次是将服务端的文件下载到本地。<br>
   **具体过程**
