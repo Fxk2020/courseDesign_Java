@@ -48,12 +48,12 @@ Java课设
 1）**日记记录**——每当管理员发布公告时，记录到日志记录中。
 xingming|item|time
 --|--|--
-管理员的姓名|行为（发布公告还是投票）|时间
+管理员的姓名|行为(发布公告还是投票)|时间
 ![YD8yb4.png](https://s1.ax1x.com/2020/05/14/YD8yb4.png)
 2）**内容储存**——将公告的内容放进数据库
-name|information|time<br>
---|--|--<br>
-管理员的姓名|发布公告的内容|时间<br>
+name|information|time
+--|--|--
+管理员的姓名|发布公告的内容|时间
 ![YDNJtH.png](https://s1.ax1x.com/2020/05/14/YDNJtH.png)
 * #### 3.编辑公告——界面设计
   点击确认按钮将公告内容放进数据库。
@@ -68,7 +68,7 @@ name|information|time<br>
   **流程**：管理员发起投票，写入数据库中，并且记录每个选项的票数。同时将该过程记录到班级日志中。
 
   name|item|option1|option2|option3|option4|number1|number2|number3|number4|time
-  --|--|--|--|--|--|--|--|--|--|--|--|-- 
+  --|--|--|--|--|--|--|--|--|--|--|--|--
   发起投票人|投票内容|选项一|选项二|选项三|选项四|选项一的票数|选项二的票数|选项三的票数|选项四的票数|发起投票的时间
   ![Ycs1Fs.png](https://s1.ax1x.com/2020/05/16/Ycs1Fs.png)
 * #### 2.每个成员投票
@@ -138,7 +138,7 @@ name|information|time<br>
 		contentPane.add(processBar);// 向面板添加进度控件
 	}
   ```
-  ![请添加图片描述](https://img-blog.csdnimg.cn/20200521214845363.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pvZXlfcm8=,size_16,color_FFFFFF,t_70)
+  ![请添加图片描述](https://github.com/Fxk2020/courseDesign_Java/blob/master/imgs/4WX(L7_ACAA%60YI8G%5BIXAFPR.png)
   ![请添加图片描述](https://img-blog.csdnimg.cn/20200521214845344.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pvZXlfcm8=,size_16,color_FFFFFF,t_70)
   ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200521215026200.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pvZXlfcm8=,size_16,color_FFFFFF,t_70)
 * #### 2.文件的下载
