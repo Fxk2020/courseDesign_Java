@@ -27,7 +27,7 @@ public class FileClient extends Socket{
 	private Socket client;
 	private FileInputStream fis;
 	private DataOutputStream dos;
-	private JProcessBarDemo JPBD = new JProcessBarDemo();
+	private JProcessBarDemo JPBD = new JProcessBarDemo();//显示文件上传的进度条
 
 	JFrame frame = new JFrame();
 	JFileChooser fileChooser;//点击上传文件的时候都会弹出一个框让我们选择要上传的文件，虽然经常遇到，但却不知道这是哪种组件。在Java里面这种文件导航窗口就是FileChooser
@@ -117,6 +117,11 @@ public class FileClient extends Socket{
 										//是返回零，否返回1，叉号返回-1		
 
 										haifenxiangma=JOptionPane.showConfirmDialog(null, "是否继续共享", "           共享成功,亲", JOptionPane.YES_NO_OPTION); 
+										//每次分享结束都对全局变量清零
+										progress = 0;
+										length = 0;
+										wanchengdu = 0;
+										
 										break;
 									}
 								} catch (IOException e1) {

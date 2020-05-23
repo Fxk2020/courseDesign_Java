@@ -10,6 +10,7 @@ import log.Log;
 import log.Register;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -81,7 +82,9 @@ public class Download extends JFrame implements ActionListener {
 		this.add(fileListPanel);
 
 		b1 = new JButton("下载");
-		b1.setBounds(350, 550, 25, 25);
+		b1.setBounds(0, 0, 5, 5);
+		b1.setBackground(new Color(30, 144, 255));
+		b1.setForeground(Color.white);
 		fileListPanel.add(b1);
 		b1.addActionListener(this);
 
@@ -144,7 +147,7 @@ public class Download extends JFrame implements ActionListener {
 
 			Users u2 = new Users();
 
-			//获得徐下载的文件列表
+			//获得需要下载的文件列表
 			filelist_add();
 			
 			System.out.println(fileList2.size());

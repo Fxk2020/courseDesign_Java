@@ -46,12 +46,12 @@ import 公告.Informtion;
 public class Log extends JPanel implements ActionListener {
 
 	static final int W = 500;
-	static final int H = 300;
+	static final int H = 330;
 	JFrame frame = new JFrame();
 	
 	Socket s = null;
 	
-	JButton b3 = new JButton(new ImageIcon("imag/qqLog1.png"));
+	JButton b3 ;
 	final static JTextField t1 = new JTextField(15);
 	final JPasswordField t2 = new JPasswordField(18);                    // 标志为密码输入框，即输入的字符不能显示！
 
@@ -147,9 +147,8 @@ public class Log extends JPanel implements ActionListener {
 		frame.setSize(W, H);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("                              班级管理系统");
+		frame.setTitle("班级管理系统");
 
-	
 
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension size = kit.getScreenSize(); // 获得屏幕的分辨率大小
@@ -162,11 +161,11 @@ public class Log extends JPanel implements ActionListener {
 		JLabel l0 = new JLabel("  ");// 只是用来调节相对位置位置的组件
 
 		Font font = new Font("宋体", Font.PLAIN, 25);// 创建1个字体实例
-		JLabel l1 = new JLabel("昵称");
+		JLabel l1 = new JLabel("昵称: ");
 		l1.setFont(font);
 		l1.setForeground(Color.BLACK);
 
-		JLabel l2 = new JLabel("密码");
+		JLabel l2 = new JLabel("密码: ");
 		l2.setFont(font);
 		l2.setForeground(Color.BLACK);
 
@@ -176,6 +175,7 @@ public class Log extends JPanel implements ActionListener {
 		Listenerb1 listener2 = new Listenerb1();
 		b1.addActionListener(listener2);
 
+		b3 = new JButton("登录");
 		b3.setBackground(new Color(30, 144, 255));
 		b3.setForeground(Color.white);
 		b3.addActionListener(this);
@@ -188,11 +188,11 @@ public class Log extends JPanel implements ActionListener {
 		con.fill = GridBagConstraints.BOTH;
 		con.anchor = GridBagConstraints.SOUTH;// 当组件没有空间大时，使组件位于南部
 
-		this.add(l0, con, 0, 3, 1, 1);
-		this.add(l1, con, 0, 5, 1, 1);// 账号，密码
-		this.add(l2, con, 0, 7, 1, 1);
+		this.add(l0, con, -1, 3, 1, 1);
+		this.add(l1, con, -1, 5, 1, 1);// 账号，密码
+		this.add(l2, con, -1, 7, 1, 1);
 		this.add(b1, con, 2, 5, 1, 2);// 注册，找回密码
-		this.add(b3, con, 1, 9, 1, 2);// 登陆按钮
+		this.add(b3, con, 2, 7, 1, 2);// 登陆按钮
 		this.add(t1, con, 1, 5, 1, 2);// 文本框
 		this.add(t2, con, 1, 7, 1, 3);
 		
