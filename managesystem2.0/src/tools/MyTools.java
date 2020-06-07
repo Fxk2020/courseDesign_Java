@@ -14,5 +14,7 @@ public class MyTools {
 	public static Font f7 = new Font("Î¢ÈíÑÅºÚ", Font.PLAIN, 20);
 	public static Font f8 = new Font("¿¬Ìå", Font.PLAIN, 25);
 	public static Font f9 = new Font("¿¬Ìå", Font.PLAIN, 20);
+	
+	public static Font f18 = new Font("¿¬Ìå", Font.PLAIN, 12);
 
 }

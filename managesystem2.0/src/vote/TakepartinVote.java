@@ -103,15 +103,15 @@ public class TakepartinVote extends JFrame implements ActionListener {
 
 			}
 			JLabel item0 = new JLabel("投票内容:");
-			item0.setFont(MyTools.f8);
-			item0.setBounds(70, 0, 200, 50);
+			item0.setFont(MyTools.f18);
+			item0.setBounds(70, 0, 100, 50);
 
 			JLabel name0 = new JLabel("发起人:");
 			name0.setFont(MyTools.f7);
 			name0.setBounds(120, 25, 100, 50);
 
 			// 获得投票内容和投票发起人
-			item.setFont(MyTools.f8);
+			item.setFont(MyTools.f18);
 			item.setBounds(200, 0, 300, 50);
 			name.setFont(MyTools.f7);
 			name.setBounds(189, 25, 100, 50);

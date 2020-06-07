@@ -229,13 +229,18 @@ public class MySerever {
 				String message = rs.getString("information");
 				String time = rs.getString("time");
 
-				aList.add("发布人：" + name + "\r\n" + "  " + "内容 :" + message + "\r\n" + "发布时间：" + "\r\n" + time + "\r\n");// 使用java中的转义符"\r\n":实现换行
+				aList.add("发布人：" + name + "\r\n" + "  " + "内容 :" + message + "\r\n" + "发布时间："  + time + "\r\n");// 使用java中的转义符"\r\n":实现换行
 			}
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
 		information = aList.toString();// 将array list转变成string
+		
+		information = information.replace(',', ' ');
+		information = information.replace('[', ' ');
+		information = information.substring(0, information.length()-1);
+		
 
 		return information;
 	}
@@ -258,9 +263,9 @@ public class MySerever {
 				String item = rs.getString("item");
 
 				if (item.equals("公告")) {
-					aList.add(i + "管理员：" + name + ":\n\t" + "在" + time + "对" + item + "进行了修改" + "\r\n");// 使用java中的转义符"\r\n":实现换行
+					aList.add(i + "、管理员：" + name + "\n" + "在" + time + "对" + item + "进行了修改" + "\r\n");// 使用java中的转义符"\r\n":实现换行
 				} else if (item.equals("投票")) {
-					aList.add(i + "管理员：" + name + ":\n\t" + "在" + time + "发起了" + item + "\r\n");// 使用java中的转义符"\r\n":实现换行
+					aList.add(i + "、管理员：" + name + "\n" + "在" + time + "发起了" + item + "\r\n");// 使用java中的转义符"\r\n":实现换行
 				}
 				i++;
 			}
@@ -269,7 +274,13 @@ public class MySerever {
 			e.printStackTrace();
 		}
 
-		record = aList.toString();
+		record = aList.toString();//去掉中括号
+		
+		//使输出的格式最美观
+		record = record.replace(',', ' ');
+		record = record.replace('[', ' ');
+		record = record.substring(0, record.length()-1);
+		
 
 		return record;
 	}
@@ -419,6 +430,7 @@ public class MySerever {
 	private boolean checkvote_end() {
 		boolean b = true;
 		
+		int studentNumber = IDUS.getStudentNumber();//获得班级的总人数
 		
 		int i =0;
 		ResultSet rs;
@@ -433,7 +445,7 @@ public class MySerever {
 			e.printStackTrace();
 		}
 		
-		if(i == 4) {//班级还有人没有投票
+		if(i == studentNumber) {//所有人已经投完票了
 			b =false;
 		}
 		

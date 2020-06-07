@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+
 /*
 * 1--窗口+面板+固定
 * 2--在界面上画出蛇
@@ -42,6 +44,9 @@ public class SnakeGame extends JFrame implements KeyListener {
 	private Bean bean = null;
 	private Random rand = new Random();
 	private boolean bean_is_eated = false;
+	
+	//死亡后退出窗口但不退出程序
+	private boolean xianshi = true;
 
 	public SnakeGame() {
 		this.setAlwaysOnTop(true);
@@ -51,6 +56,22 @@ public class SnakeGame extends JFrame implements KeyListener {
 		this.setLocationRelativeTo(null);
 		sp = new SP();
 		this.add(sp);
+		
+		new Thread() {
+			@SuppressWarnings("deprecation")
+			public void run() {
+				while(true) {
+					if(!xianshi) {
+						SnakeGame.this.dispose();
+						System.out.print(xianshi);
+						sp.setVisible(false);
+						this.stop();
+					}
+					
+				    System.out.println(xianshi);
+				}
+			} 
+	}.start();
 		this.setVisible(true);
 		this.addKeyListener(this);
 	}
@@ -79,7 +100,8 @@ public class SnakeGame extends JFrame implements KeyListener {
 //判断是否撞墙 撞墙 GAME OVER ！
 						if (ses.getFirst().getSey() < 0) {
 							JOptionPane.showMessageDialog(sp, "GAME OVER !", "撞墙提示", JOptionPane.DEFAULT_OPTION);
-							Runtime.getRuntime().exit(0);
+							xianshi = false;
+							timer.cancel();
 						}
 					}
 					if ("left".equalsIgnoreCase(direction)) {
@@ -96,8 +118,8 @@ public class SnakeGame extends JFrame implements KeyListener {
 //判断是否撞墙 撞墙 GAME OVER ！
 						if (ses.getFirst().getSex() < 0) {
 							JOptionPane.showMessageDialog(sp, "GAME OVER !", "撞墙提示", JOptionPane.DEFAULT_OPTION);
-							Runtime.getRuntime().exit(0);
-                            
+							xianshi = false;
+							timer.cancel();
 						}
 					}
 					if ("down".equalsIgnoreCase(direction)) {
@@ -114,7 +136,8 @@ public class SnakeGame extends JFrame implements KeyListener {
 //判断是否撞墙 撞墙 GAME OVER ！
 						if (ses.getFirst().getSey() + sesize > fh) {
 							JOptionPane.showMessageDialog(sp, "GAME OVER !", "撞墙提示", JOptionPane.DEFAULT_OPTION);
-							Runtime.getRuntime().exit(0);
+							xianshi = false;
+							timer.cancel();
 						}
 					}
 					if ("right".equalsIgnoreCase(direction)) {
@@ -131,7 +154,8 @@ public class SnakeGame extends JFrame implements KeyListener {
 //判断是否撞墙 撞墙 GAME OVER ！
 						if (ses.getFirst().getSex() + sesize > fw) {
 							JOptionPane.showMessageDialog(sp, "GAME OVER !", "撞墙提示", JOptionPane.DEFAULT_OPTION);
-							Runtime.getRuntime().exit(0);
+							xianshi = false;
+							timer.cancel();
 						}
 					}
 //蛇咬到自己身体的判断
@@ -139,7 +163,8 @@ public class SnakeGame extends JFrame implements KeyListener {
 						if (ses.getFirst().getSex() == ses.get(i).getSex()
 								&& ses.getFirst().getSey() == ses.get(i).getSey()) {
 							JOptionPane.showMessageDialog(sp, "你是猪啊，咬到自己身体啦！", "自残了，兄弟！", JOptionPane.DEFAULT_OPTION);
-							Runtime.getRuntime().exit(0);
+							xianshi = false;
+							timer.cancel();
 							
 						}
 					}

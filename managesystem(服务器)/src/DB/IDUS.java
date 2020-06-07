@@ -65,17 +65,33 @@ public class IDUS {
 		return rs;
 	}
 	
+	public static int getStudentNumber() {
+		ResultSet temp = executeQuery("select count(Name) from Student1 ;");
+		int count = 0;
+		try {
+			while(temp.next()) {
+				count = temp.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return count;
+	}
+	
 	public static void main(String[] args) {
 		 SwingUtilities.invokeLater(new Runnable() {
 				
 				
 				public void run() {
 					ResultSet rSet = IDUS.executeQuery("select * from student1");
+					int count = getStudentNumber();
 					
 					try {
 						while(rSet.next()) {
 						
-							System.out.println(rSet.getString("name"));
+							System.out.println(count);
 						
 						}
 					} catch (SQLException e) {

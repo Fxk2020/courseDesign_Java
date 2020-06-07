@@ -17,8 +17,8 @@ public class logRecord extends JFrame {
 	
 	JTextArea area1 = new JTextArea(18, 15);
 	
-	final int W = 460;
-	final int H = 560;
+	final int W = 560;
+	final int H = 660;
 	
 	public logRecord() {
 		
@@ -40,7 +40,7 @@ public class logRecord extends JFrame {
 		}
 		
 		
-		this.setTitle("                          日志记录");
+		this.setTitle("日志记录");
 		this.setSize(W, H);
 //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
         this.setVisible(true);
@@ -54,7 +54,7 @@ public class logRecord extends JFrame {
         area1.setLineWrap(true);// 使文本区域自动换行
 		area1.setWrapStyleWord(true);// 使单词完整
 		JScrollPane scrollpane1 = new JScrollPane(area1, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scrollpane1.setBounds(25, 60, 380, 400);
+		scrollpane1.setBounds(25, 60, 480, 500);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -62,7 +62,7 @@ public class logRecord extends JFrame {
 		 // 在Java项目下放图片
         ImageIcon backGroundIma = new ImageIcon("imag/beautiful.jpg");
 		JLabel backGroundPic = new JLabel(backGroundIma); // 设置一个标签将图片加在标签上
-		backGroundPic.setBounds(0, 0, 460, 560); // 参数X，Y，W，H大小必须超过JFrame的大小否则图片不会覆盖窗体
+		backGroundPic.setBounds(0, 0, 560, 660); // 参数X，Y，W，H大小必须超过JFrame的大小否则图片不会覆盖窗体
 		this.getLayeredPane().add(backGroundPic, new Integer(Integer.MIN_VALUE));
 		((JPanel) this.getContentPane()).setOpaque(false);
 		panel.setOpaque(false); // 将面板设为透明SETOpaque（）方法
@@ -94,6 +94,9 @@ public class logRecord extends JFrame {
 
 			}
 			if(m.getMessType().equals(MessageType.message_record_successfully)) {
+				
+				
+				
 				area1.setText(m.getInformation());
 				area1.setFont(MyTools.f6);
 			}

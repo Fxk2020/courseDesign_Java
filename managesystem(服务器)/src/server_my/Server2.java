@@ -17,7 +17,7 @@ public class Server2 extends JFrame{
 
 	final int W = 500;
 	final int H = 750;
-	JButton button1 = new JButton("开启服务器");
+	JButton button1 ;
 
 	public Server2() {
 		
@@ -38,6 +38,8 @@ public class Server2 extends JFrame{
 			e.printStackTrace();
 		}
 
+		button1 = new JButton("开启服务器");
+		
 		this.setLayout(null);// setBounds方法必须使面板的SETLAYOUT为空
 
 		this.setSize(W, H);

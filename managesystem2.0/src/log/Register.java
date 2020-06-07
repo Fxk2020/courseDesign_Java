@@ -33,9 +33,10 @@ public class Register extends JPanel {
 
 	public Register() {
 //this1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//
+		
 		this1.setSize(W, H);
 		this1.setVisible(true);
-		this1.setTitle("                                  用户注册");
+		this1.setTitle("用户注册");
 
 		this1.addWindowListener(new WindowAdapter() {// 匿名类
 
@@ -63,11 +64,11 @@ public class Register extends JPanel {
 		l3.setFont(font2);
 		bel1.setFont(font2);
 		bel2.setFont(font2);
-		l1.setForeground(new Color(30, 100, 255));
-		l2.setForeground(new Color(30, 100, 255));
-		l3.setForeground(new Color(30, 100, 255));
-		bel1.setForeground(new Color(30, 100, 255));
-		bel2.setForeground(new Color(30, 100, 255));
+		l1.setForeground(new Color(0,0,0));
+		l2.setForeground(new Color(0,0,0));
+		l3.setForeground(new Color(0,0,0));
+		bel1.setForeground(new Color(0,0,0));
+		bel2.setForeground(new Color(0,0,0));
 
 		GridBagLayout lay = new GridBagLayout();// gridbaglayout布局管理器
 		this.setLayout(lay);
@@ -77,6 +78,8 @@ public class Register extends JPanel {
 		label1.setForeground(new Color(255, 100, 89));// 设置文字的颜色
 
 		JButton b1 = new JButton("确认");
+		b1.setBackground(new Color(30, 144, 255));
+		b1.setForeground(Color.white);
 		B1listener listener1 = new B1listener();
 		b1.addActionListener(listener1);
 
